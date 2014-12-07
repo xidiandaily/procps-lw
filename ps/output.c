@@ -470,6 +470,15 @@ static int pr_ppid(char *restrict const outbuf, const proc_t *restrict const pp)
   return snprintf(outbuf, COLWID, "%u", pp->ppid);
 }
 
+/* Add by Lawrnce Chi, show the process utime  */
+static int pr_utime(char *restrict const outbuf, const proc_t *restrict const pp){
+    return snprintf(outbuf, COLWID, "%u", pp->utime);
+}
+
+/* Add by Lawrnce Chi, show the process stime  */
+static int pr_pstime(char *restrict const outbuf, const proc_t *restrict const pp){
+    return snprintf(outbuf, COLWID, "%u", pp->stime);
+}
 
 /* cumulative CPU time, [dd-]hh:mm:ss format (not same as "etime") */
 static int pr_time(char *restrict const outbuf, const proc_t *restrict const pp){
@@ -1407,6 +1416,7 @@ static const format_struct format_array[] = {
 {"projid",    "PROJID",  pr_nop,      sr_nop,     5,   0,    SUN, PO|RIGHT},
 {"pset",      "PSET",    pr_nop,      sr_nop,     4,   0,    DEC, TO|RIGHT},
 {"psr",       "PSR",     pr_psr,      sr_nop,     3,   0,    DEC, TO|RIGHT},
+{"pstime",    "PSTIME",  pr_pstime,   sr_stime,   6,   0,    LNx, ET|RIGHT},
 {"psxpri",    "PPR",     pr_nop,      sr_nop,     3,   0,    DEC, TO|RIGHT},
 {"re",        "RE",      pr_nop,      sr_nop,     3,   0,    BSD, AN|RIGHT},
 {"resident",  "RES",     pr_nop,      sr_resident, 5,MEM,    LNX, PO|RIGHT},
@@ -1492,7 +1502,7 @@ static const format_struct format_array[] = {
 {"usertime",  "USER",    pr_nop,      sr_nop,     4,   0,    DEC, ET|RIGHT},
 {"usrpri",    "UPR",     pr_nop,      sr_nop,     3,   0,    DEC, TO|RIGHT}, /*upr*/
 {"util",      "C",       pr_c,        sr_pcpu,    2,   0,    SGI, ET|RIGHT}, // not sure about "C"
-{"utime",     "UTIME",   pr_nop,      sr_utime,   6,   0,    LNx, ET|RIGHT},
+{"utime",     "UTIME",   pr_utime,    sr_utime,   6,   0,    LNx, ET|RIGHT},
 {"vm_data",   "DATA",    pr_nop,      sr_vm_data, 5,   0,    LNx, PO|RIGHT},
 {"vm_exe",    "EXE",     pr_nop,      sr_vm_exe,  5,   0,    LNx, PO|RIGHT},
 {"vm_lib",    "LIB",     pr_nop,      sr_vm_lib,  5,   0,    LNx, PO|RIGHT},
