@@ -14,11 +14,11 @@
 
 EXTERN_C_BEGIN
 
-extern void display_version(void);	/* display suite version */
-extern const char procps_version[];		/* global buf for suite version */
+extern void display_version(void);  /* display suite version */
+extern const char procps_version[];     /* global buf for suite version */
 
-extern int linux_version_code;		/* runtime version of LINUX_VERSION_CODE
-					   in /usr/include/linux/version.h */
+extern int linux_version_code;      /* runtime version of LINUX_VERSION_CODE
+                       in /usr/include/linux/version.h */
 
 /* Convenience macros for composing/decomposing version codes */
 #define LINUX_VERSION(x,y,z)   (0x10000*(x) + 0x100*(y) + z)
@@ -28,4 +28,4 @@ extern int linux_version_code;		/* runtime version of LINUX_VERSION_CODE
 
 EXTERN_C_END
 
-#endif	/* PROC_VERSION_H */
+#endif  /* PROC_VERSION_H */

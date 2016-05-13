@@ -1,7 +1,7 @@
 /*
- * Copyright 1998-2002 by Albert Cahalan; all rights resered.         
+ * Copyright 1998-2002 by Albert Cahalan; all rights resered.
  * This file may be used subject to the terms and conditions of the
- * GNU Library General Public License Version 2, or any later version  
+ * GNU Library General Public License Version 2, or any later version
  * at your option, as published by the Free Software Foundation.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -182,79 +182,88 @@
  * reverse in place of n
  */
 
-typedef union sel_union {
-  pid_t pid;
-  pid_t ppid;
-  uid_t uid;
-  gid_t gid;
-  dev_t tty;
-  char  cmd[16];  /* this is _not_ \0 terminated */
+typedef union sel_union
+{
+    pid_t pid;
+    pid_t ppid;
+    uid_t uid;
+    gid_t gid;
+    dev_t tty;
+    char  cmd[16];  /* this is _not_ \0 terminated */
 } sel_union;
 
-typedef struct selection_node {
-  struct selection_node *next;
-  sel_union *u;  /* used if selection type has a list of values */
-  int n;         /* used if selection type has a list of values */
-  int typecode;
+typedef struct selection_node
+{
+    struct selection_node *next;
+    sel_union *u;  /* used if selection type has a list of values */
+    int n;         /* used if selection type has a list of values */
+    int typecode;
 } selection_node;
 
-typedef struct sort_node {
-  struct sort_node *next;
-  int (*sr)(const proc_t* P, const proc_t* Q); /* sort function */
-  int reverse;   /* can sort backwards */
-  int typecode;
-  int need;
+typedef struct sort_node
+{
+    struct sort_node *next;
+    int (*sr)(const proc_t *P, const proc_t *Q); /* sort function */
+    int reverse;   /* can sort backwards */
+    int typecode;
+    int need;
 } sort_node;
 
-typedef struct format_node {
-  struct format_node *next;
-  char *name;                             /* user can override default name */
-  int (*pr)(char *restrict const outbuf, const proc_t *restrict const pp); // print function
-/*  int (* const sr)(const proc_t* P, const proc_t* Q); */ /* sort function */
-  int width;
-  int need;
-  int vendor;                             /* Vendor that invented this */
-  int flags;
-  int typecode;
+typedef struct format_node
+{
+    struct format_node *next;
+    char *name;                             /* user can override default name */
+    int (*pr)(char *restrict const outbuf, const proc_t *restrict const pp); // print function
+    /*  int (* const sr)(const proc_t* P, const proc_t* Q); */ /* sort function */
+    int width;
+    int need;
+    int vendor;                             /* Vendor that invented this */
+    int flags;
+    int typecode;
 } format_node;
 
-typedef struct format_struct {
-  const char *spec; /* format specifier */
-  const char *head; /* default header in the POSIX locale */
-  int (* const pr)(char *restrict const outbuf, const proc_t *restrict const pp); // print function
-  int (* const sr)(const proc_t* P, const proc_t* Q); /* sort function */
-  const int width;
-  const int need;       /* data we will need (files to read, etc.) */
-  const int vendor; /* Where does this come from? */
-  const int flags;
+typedef struct format_struct
+{
+    const char *spec; /* format specifier */
+    const char *head; /* default header in the POSIX locale */
+    int (* const pr)(char *restrict const outbuf, const proc_t *restrict const pp); // print function
+    int (* const sr)(const proc_t *P, const proc_t *Q); /* sort function */
+    const int width;
+    const int need;       /* data we will need (files to read, etc.) */
+    const int vendor; /* Where does this come from? */
+    const int flags;
 } format_struct;
 
 /* though ps-specific, needed by general file */
-typedef struct macro_struct {
-  const char *spec; /* format specifier */
-  const char *head; /* default header in the POSIX locale */
+typedef struct macro_struct
+{
+    const char *spec; /* format specifier */
+    const char *head; /* default header in the POSIX locale */
 } macro_struct;
 
 /**************** PS TYPEDEF ***********************/
 
-typedef struct aix_struct {
-  const int   desc; /* 1-character format code */
-  const char *spec; /* format specifier */
-  const char *head; /* default header in the POSIX locale */
+typedef struct aix_struct
+{
+    const int   desc; /* 1-character format code */
+    const char *spec; /* format specifier */
+    const char *head; /* default header in the POSIX locale */
 } aix_struct;
 
-typedef struct shortsort_struct {
-  const int   desc; /* 1-character format code */
-  const char *spec; /* format specifier */
+typedef struct shortsort_struct
+{
+    const int   desc; /* 1-character format code */
+    const char *spec; /* format specifier */
 } shortsort_struct;
 
 /* Save these options for later: -o o -O O --format --sort */
-typedef struct sf_node {
-  struct sf_node *next;  /* next arg */
-  format_node *f_cooked;  /* convert each arg alone, then merge */
-  sort_node   *s_cooked;  /* convert each arg alone, then merge */
-  char *sf;
-  int sf_code;
+typedef struct sf_node
+{
+    struct sf_node *next;  /* next arg */
+    format_node *f_cooked;  /* convert each arg alone, then merge */
+    sort_node   *s_cooked;  /* convert each arg alone, then merge */
+    char *sf;
+    int sf_code;
 } sf_node;
 
 /********************* UNDECIDED GLOBALS **************/
@@ -283,7 +292,7 @@ extern int             bsd_c_option;
 extern int             bsd_e_option;
 extern uid_t           cached_euid;
 extern dev_t           cached_tty;
-extern char            forest_prefix[4 * 32*1024 + 100];
+extern char            forest_prefix[4 * 32 * 1024 + 100];
 extern int             forest_type;
 extern unsigned        format_flags;     /* -l -f l u s -j... */
 extern format_node    *format_list; /* digested formatting options */

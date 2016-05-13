@@ -3,12 +3,15 @@
 #include "proc/whattime.h"
 #include "proc/version.h"
 
-int main(int argc, char *argv[]) {
-    if(argc == 1) {
+int main(int argc, char *argv[])
+{
+    if (argc == 1)
+    {
         print_uptime();
         return 0;
     }
-    if((argc == 2) && (!strcmp(argv[1], "-V"))) {
+    if ((argc == 2) && (!strcmp(argv[1], "-V")))
+    {
         display_version();
         return 0;
     }

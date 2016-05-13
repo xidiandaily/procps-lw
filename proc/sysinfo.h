@@ -16,7 +16,7 @@ extern void eight_cpu_numbers(JT *uret, JT *nret, JT *sret, JT *iret, JT *wret, 
 #undef JT
 #endif
 
-extern int        uptime (double *uptime_secs, double *idle_secs);
+extern int        uptime(double *uptime_secs, double *idle_secs);
 extern void       loadavg(double *av1, double *av5, double *av15);
 
 
@@ -57,10 +57,10 @@ extern unsigned long kb_pagetables;
 #define BUFFSIZE (64*1024)
 typedef unsigned long long jiff;
 extern void getstat(jiff *restrict cuse, jiff *restrict cice, jiff *restrict csys, jiff *restrict cide, jiff *restrict ciow, jiff *restrict cxxx, jiff *restrict cyyy, jiff *restrict czzz,
-	     unsigned long *restrict pin, unsigned long *restrict pout, unsigned long *restrict s_in, unsigned long *restrict sout,
-	     unsigned *restrict intr, unsigned *restrict ctxt,
-	     unsigned int *restrict running, unsigned int *restrict blocked,
-	     unsigned int *restrict btime, unsigned int *restrict processes);
+                    unsigned long *restrict pin, unsigned long *restrict pout, unsigned long *restrict s_in, unsigned long *restrict sout,
+                    unsigned *restrict intr, unsigned *restrict ctxt,
+                    unsigned int *restrict running, unsigned int *restrict blocked,
+                    unsigned int *restrict btime, unsigned int *restrict processes);
 
 extern void meminfo(void);
 
@@ -91,43 +91,46 @@ extern unsigned long vm_allocstall;
 
 extern void vminfo(void);
 
-typedef struct disk_stat{
-	unsigned long long reads_sectors;
-	unsigned long long written_sectors;
-	char               disk_name [16];
-	unsigned           inprogress_IO;
-	unsigned           merged_reads;
-	unsigned           merged_writes;
-	unsigned           milli_reading;
-	unsigned           milli_spent_IO;
-	unsigned           milli_writing;
-	unsigned           partitions;
-	unsigned           reads;
-	unsigned           weighted_milli_spent_IO;
-	unsigned           writes;
-}disk_stat;
+typedef struct disk_stat
+{
+    unsigned long long reads_sectors;
+    unsigned long long written_sectors;
+    char               disk_name [16];
+    unsigned           inprogress_IO;
+    unsigned           merged_reads;
+    unsigned           merged_writes;
+    unsigned           milli_reading;
+    unsigned           milli_spent_IO;
+    unsigned           milli_writing;
+    unsigned           partitions;
+    unsigned           reads;
+    unsigned           weighted_milli_spent_IO;
+    unsigned           writes;
+} disk_stat;
 
-typedef struct partition_stat{
-	char partition_name [16];
-	unsigned long long reads_sectors;
-	unsigned           parent_disk;  // index into a struct disk_stat array
-	unsigned           reads;
-	unsigned           writes;
-	unsigned           requested_writes;
-}partition_stat;
+typedef struct partition_stat
+{
+    char partition_name [16];
+    unsigned long long reads_sectors;
+    unsigned           parent_disk;  // index into a struct disk_stat array
+    unsigned           reads;
+    unsigned           writes;
+    unsigned           requested_writes;
+} partition_stat;
 
 extern unsigned int getpartitions_num(struct disk_stat *disks, int ndisks);
-extern unsigned int getdiskstat (struct disk_stat**,struct partition_stat**);
+extern unsigned int getdiskstat(struct disk_stat **, struct partition_stat **);
 
-typedef struct slab_cache{
-	char name[48];
-	unsigned active_objs;
-	unsigned num_objs;
-	unsigned objsize;
-	unsigned objperslab;
-}slab_cache;
+typedef struct slab_cache
+{
+    char name[48];
+    unsigned active_objs;
+    unsigned num_objs;
+    unsigned objsize;
+    unsigned objperslab;
+} slab_cache;
 
-extern unsigned int getslabinfo (struct slab_cache**);
+extern unsigned int getslabinfo(struct slab_cache **);
 
 extern unsigned get_pid_digits(void) FUNCTION;
 
